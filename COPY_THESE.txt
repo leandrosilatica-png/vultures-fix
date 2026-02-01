@@ -1,0 +1,48 @@
+═══════════════════════════════════════════════════════════════
+  COPY THESE FILES INTO YOUR DARKTIDE MODS FOLDER
+═══════════════════════════════════════════════════════════════
+
+YOUR MODS FOLDER LOCATION:
+C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 DARKTIDE\mods
+
+(Or find it: Steam → Right-click Darktide → Properties → Installed Files → Browse → look for "mods" folder)
+
+═══════════════════════════════════════════════════════════════
+
+COPY EXACTLY THESE 2 ITEMS:
+
+1. vultures_dodge_tracker.mod        ← THIS FILE
+2. scripts                            ← THIS ENTIRE FOLDER
+
+═══════════════════════════════════════════════════════════════
+
+DO NOT COPY:
+❌ README.md
+❌ INSTALL.md  
+❌ WHAT_TO_INSTALL.md
+❌ Any other .md files
+❌ This COPY_THESE.txt file
+❌ The entire repository folder
+
+═══════════════════════════════════════════════════════════════
+
+AFTER COPYING, YOUR MODS FOLDER SHOULD LOOK LIKE:
+
+mods\
+├── vultures_dodge_tracker.mod  ← file directly here
+└── scripts\                     ← folder directly here
+    └── mods\
+        └── vultures_dodge_tracker\
+            ├── vultures_dodge_tracker.lua
+            ├── vultures_dodge_tracker_data.lua
+            └── vultures_dodge_tracker_localization.lua
+
+═══════════════════════════════════════════════════════════════
+
+QUICK STEPS:
+1. Select "vultures_dodge_tracker.mod" (the file)
+2. CTRL+Click "scripts" (the folder) to select both
+3. Drag both into your mods folder
+4. Done!
+
+═══════════════════════════════════════════════════════════════
