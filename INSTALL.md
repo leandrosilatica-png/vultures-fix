@@ -1,13 +1,36 @@
 # Installation Guide
 
-## Prerequisites
+## 🚀 QUICK INSTALL (Drag & Drop)
+
+**You need to copy TWO things into your Darktide mods folder:**
+
+1. **`vultures_dodge_tracker.mod`** (the file in the root)
+2. **`scripts`** folder (the entire folder)
+
+### Where to find your mods folder:
+Press `Win + R`, type `%AppData%\Fatshark\Darktide\mods`, press Enter
+
+### What to drag and drop:
+```
+From this repository:          →    To your mods folder:
+┌─────────────────────────┐         ┌──────────────────────────────┐
+│ vultures_dodge_tracker.mod  →    │ %AppData%\Fatshark\Darktide\mods\
+│ scripts/                    →    │ %AppData%\Fatshark\Darktide\mods\
+└─────────────────────────┘         └──────────────────────────────┘
+```
+
+That's it! Both items go directly into the mods folder.
+
+---
+
+## Detailed Step-by-Step Installation
+
+### Prerequisites
 - Warhammer 40,000: Darktide installed
 - Darktide Mod Framework (DMF) installed and working
 
-## Step-by-Step Installation
-
 ### 1. Download the Mod
-Download all files from this repository.
+Download all files from this repository (use "Code" → "Download ZIP" on GitHub).
 
 ### 2. Locate Your Darktide Mods Directory
 The default location is:
@@ -22,20 +45,16 @@ To get there:
 
 ### 3. Install the Mod Files
 
-Copy the following files to your mods directory:
+**Copy BOTH of these to your mods directory:**
 
 ```
-mods/
-├── vultures_dodge_tracker.mod
-└── scripts/
-    └── mods/
-        └── vultures_dodge_tracker/
-            ├── vultures_dodge_tracker.lua
-            ├── vultures_dodge_tracker_data.lua
-            └── vultures_dodge_tracker_localization.lua
+✅ vultures_dodge_tracker.mod          (drag this file)
+✅ scripts/                            (drag this entire folder)
 ```
 
-Your final structure should look like:
+**DO NOT** copy the documentation files (README.md, INSTALL.md, etc.) - only the two items above.
+
+After copying, your mods folder structure should look like:
 ```
 %AppData%\Fatshark\Darktide\mods\
 ├── vultures_dodge_tracker.mod

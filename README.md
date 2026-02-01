@@ -18,11 +18,21 @@ A Darktide mod that displays an on-screen indicator showing whether the Vulture'
 
 ## Installation
 
-1. Install the Darktide Mod Framework
-2. Copy the `vultures_dodge_tracker.mod` file to your Darktide mods directory (typically `%AppData%\Fatshark\Darktide\mods`)
-3. Copy the `scripts` folder to your Darktide mods directory
-4. Enable the mod in the Darktide Mod Framework mod manager
+### Quick Install (Drag & Drop)
+
+**Drag these TWO items into `%AppData%\Fatshark\Darktide\mods`:**
+1. ✅ `vultures_dodge_tracker.mod` (the file)
+2. ✅ `scripts` folder (the entire folder)
+
+### Detailed Steps
+
+1. Install the Darktide Mod Framework (if not already installed)
+2. Press `Win + R`, type `%AppData%\Fatshark\Darktide\mods`, press Enter
+3. Drag and drop **both** `vultures_dodge_tracker.mod` AND the `scripts` folder into the mods directory
+4. Launch Darktide and enable the mod in the Mod Manager
 5. Configure settings in-game through the mod options menu
+
+For detailed installation help, see [INSTALL.md](INSTALL.md).
 
 ## Configuration
 
