@@ -46,6 +46,11 @@ return {
 				type = "checkbox",
 				default_value = true,
 			},
+			{
+				setting_id = "weapon_template_filter",
+				type = "text_input",
+				default_value = "",
+			},
 		}
 	}
 }

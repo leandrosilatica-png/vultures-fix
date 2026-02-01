@@ -47,4 +47,10 @@ return {
 	smg_only_description = {
 		en = "Only apply shot blocking to SMG-type weapons (stubber, autopistol, etc.)",
 	},
+	weapon_template_filter = {
+		en = "Custom Weapon Template Filter",
+	},
+	weapon_template_filter_description = {
+		en = "Enter custom weapon template names to filter (comma-separated)",
+	},
 }
