@@ -1,5 +1,44 @@
 # Installation Guide
 
+## ⚠️ MODS FOLDER DOESN'T EXIST?
+
+**If `%AppData%\Fatshark\Darktide\mods` doesn't exist, you need to install the Darktide Mod Framework first!**
+
+### Option 1: Install Darktide Mod Framework (DMF) First ⭐ RECOMMENDED
+1. Download DMF from: https://github.com/Darktide-Mod-Framework/Darktide-Mod-Framework
+2. Follow their installation instructions
+3. Launch Darktide once with DMF installed - this creates the mods folder
+4. Then come back here to install this mod
+
+### Option 2: Create the Folder Manually
+If DMF is installed but the folder still doesn't exist:
+1. Press `Win + R`
+2. Type `%AppData%\Fatshark\Darktide`
+3. Press Enter
+4. Create a new folder called `mods` (right-click → New → Folder)
+
+### Alternative Mod Folder Locations
+
+**Steam Version:**
+```
+%AppData%\Fatshark\Darktide\mods
+```
+
+**Microsoft Store Version:**
+```
+C:\Users\[YourUsername]\AppData\Local\Packages\FatsharkAB.Warhammer40000Darktide_[random]\LocalCache\Local\Fatshark\Darktide\mods
+```
+
+**Custom Install:**
+If Darktide is installed elsewhere, look for:
+```
+[Darktide Install Path]\..\..\AppData\Fatshark\Darktide\mods
+```
+
+Still can't find it? Check where DMF installed - the mods folder should be in the same location.
+
+---
+
 ## 🚀 QUICK INSTALL (Drag & Drop)
 
 **You need to copy TWO things into your Darktide mods folder:**
@@ -9,6 +48,8 @@
 
 ### Where to find your mods folder:
 Press `Win + R`, type `%AppData%\Fatshark\Darktide\mods`, press Enter
+
+**If this doesn't work, see troubleshooting section above ⬆️**
 
 ### What to drag and drop:
 ```
@@ -25,9 +66,12 @@ That's it! Both items go directly into the mods folder.
 
 ## Detailed Step-by-Step Installation
 
-### Prerequisites
-- Warhammer 40,000: Darktide installed
-- Darktide Mod Framework (DMF) installed and working
+### ⚠️ Prerequisites (MUST DO FIRST!)
+- ✅ Warhammer 40,000: Darktide installed
+- ✅ **Darktide Mod Framework (DMF) installed and working** ← THIS IS REQUIRED!
+  - Get it here: https://github.com/Darktide-Mod-Framework/Darktide-Mod-Framework
+  - Launch the game once after installing DMF to create the mods folder
+  - If you skip this, the mods folder won't exist!
 
 ### 1. Download the Mod
 Download all files from this repository (use "Code" → "Download ZIP" on GitHub).
@@ -42,6 +86,8 @@ To get there:
 1. Press `Win + R`
 2. Type `%AppData%\Fatshark\Darktide\mods`
 3. Press Enter
+
+**⚠️ Folder doesn't exist?** See the troubleshooting section at the top of this document!
 
 ### 3. Install the Mod Files
 

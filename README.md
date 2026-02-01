@@ -13,10 +13,15 @@ A Darktide mod that displays an on-screen indicator showing whether the Vulture'
 
 ## Requirements
 
-- [Darktide Mod Framework (DMF)](https://github.com/Darktide-Mod-Framework/Darktide-Mod-Framework)
+- [Darktide Mod Framework (DMF)](https://github.com/Darktide-Mod-Framework/Darktide-Mod-Framework) **← INSTALL THIS FIRST!**
 - Warhammer 40,000: Darktide
 
+**⚠️ Important:** You MUST install DMF before this mod will work. DMF creates the mods folder and enables modding.
+
 ## Installation
+
+### ⚠️ First Time? Install DMF First!
+If the mods folder doesn't exist, you need to [install Darktide Mod Framework](https://github.com/Darktide-Mod-Framework/Darktide-Mod-Framework) first.
 
 ### Quick Install (Drag & Drop)
 
@@ -26,11 +31,12 @@ A Darktide mod that displays an on-screen indicator showing whether the Vulture'
 
 ### Detailed Steps
 
-1. Install the Darktide Mod Framework (if not already installed)
-2. Press `Win + R`, type `%AppData%\Fatshark\Darktide\mods`, press Enter
-3. Drag and drop **both** `vultures_dodge_tracker.mod` AND the `scripts` folder into the mods directory
-4. Launch Darktide and enable the mod in the Mod Manager
-5. Configure settings in-game through the mod options menu
+1. Install the [Darktide Mod Framework](https://github.com/Darktide-Mod-Framework/Darktide-Mod-Framework) if not already installed
+2. Launch Darktide once to create the mods folder
+3. Press `Win + R`, type `%AppData%\Fatshark\Darktide\mods`, press Enter
+4. Drag and drop **both** `vultures_dodge_tracker.mod` AND the `scripts` folder into the mods directory
+5. Launch Darktide and enable the mod in the Mod Manager
+6. Configure settings in-game through the mod options menu
 
 For detailed installation help, see [INSTALL.md](INSTALL.md).
 
