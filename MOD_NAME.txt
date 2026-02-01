@@ -1,0 +1,68 @@
+═══════════════════════════════════════════════════════════════
+  MOD NAME FOR LOAD ORDER FILE
+═══════════════════════════════════════════════════════════════
+
+MOD NAME TO USE:
+
+    vultures_dodge_tracker
+
+═══════════════════════════════════════════════════════════════
+
+WHAT IS THE LOAD ORDER FILE?
+
+The load order file (typically named "mod_load_order.txt") tells
+Darktide Mod Framework what order to load your mods in. This is 
+useful when you have multiple mods that depend on each other.
+
+═══════════════════════════════════════════════════════════════
+
+WHERE IS THE LOAD ORDER FILE?
+
+Location:
+C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 DARKTIDE\mods\mod_load_order.txt
+
+(Same folder as your mods)
+
+═══════════════════════════════════════════════════════════════
+
+HOW TO ADD THIS MOD TO LOAD ORDER:
+
+1. Open mod_load_order.txt in a text editor (create it if it doesn't exist)
+2. Add this line:
+
+   vultures_dodge_tracker
+
+3. Save the file
+
+═══════════════════════════════════════════════════════════════
+
+EXAMPLE mod_load_order.txt FILE:
+
+    mod_one
+    mod_two
+    vultures_dodge_tracker
+    mod_four
+
+(Each mod name on its own line)
+
+═══════════════════════════════════════════════════════════════
+
+DO I NEED TO USE LOAD ORDER?
+
+Most users DON'T need to manually set load order. Only use this if:
+- You have multiple mods that conflict
+- Another mod requires specific load ordering
+- You're debugging mod interactions
+
+If you're not sure, you probably don't need to worry about it!
+
+═══════════════════════════════════════════════════════════════
+
+TECHNICAL DETAILS:
+
+This name comes from the .mod file, line 5:
+    new_mod("vultures_dodge_tracker", {
+
+The mod's internal identifier is: vultures_dodge_tracker
+
+═══════════════════════════════════════════════════════════════
