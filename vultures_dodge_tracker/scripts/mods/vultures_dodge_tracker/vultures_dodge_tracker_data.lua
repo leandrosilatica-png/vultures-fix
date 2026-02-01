@@ -46,6 +46,11 @@ return {
 				type = "checkbox",
 				default_value = true,
 			},
+			{
+				setting_id = "custom_label",
+				type = "text_input",
+				default_value = "VULTURE",
+			},
 		}
 	}
 }

@@ -7,6 +7,9 @@ A Darktide mod that displays an on-screen indicator showing whether the Vulture'
 - Visual indicator that turns **green** when buff is active
 - Visual indicator that turns **red** when buff is inactive
 - Configurable position and font size
+- **Customizable label text** for the indicator
+- **Automatic shot-blocking** (EXPERIMENTAL) to preserve buff on critical hits
+- Debug mode enabled for troubleshooting
 
 ## Requirements
 
