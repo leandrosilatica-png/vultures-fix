@@ -1,11 +1,10 @@
-🎯 DRAG AND DROP THESE 2 ITEMS INTO YOUR MODS FOLDER:
+🎯 DRAG AND DROP THIS 1 FOLDER INTO YOUR MODS FOLDER:
 
 ┌─────────────────────────────────┐
-│  1. vultures_dodge_tracker.mod  │  ← This file
-│  2. scripts                      │  ← This folder
+│  vultures_dodge_tracker         │  ← This entire folder
 └─────────────────────────────────┘
 
-That's it! Just these 2 items.
+That's it! Just this 1 folder containing everything.
 
 ═══════════════════════════════════════════════════════════════
 
@@ -18,13 +17,12 @@ Right-click Darktide → Properties → Installed Files → Browse → find "mod
 
 ═══════════════════════════════════════════════════════════════
 
-✅ THESE FILES:
-   vultures_dodge_tracker.mod   ← Copy this
-   scripts/                      ← Copy this
+✅ COPY THIS FOLDER:
+   vultures_dodge_tracker/           ← The entire folder
 
 ❌ NOT THESE:
-   README.md                     ← Don't copy
-   INSTALL.md                    ← Don't copy
-   All other .md files           ← Don't copy
+   README.md                         ← Don't copy
+   INSTALL.md                        ← Don't copy
+   All other .md files               ← Don't copy
    
 ═══════════════════════════════════════════════════════════════

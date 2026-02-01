@@ -46,15 +46,14 @@ C:\Users\[YourUsername]\AppData\Local\Packages\FatsharkAB.Warhammer40000Darktide
 
 ## 🚀 QUICK INSTALL (Drag & Drop)
 
-**⚠️ CRITICAL: Do NOT copy the entire repository folder!**
+**⚠️ CRITICAL: Copy the ENTIRE mod folder!**
 
-**You need to copy exactly TWO things into your Darktide mods folder:**
+**You need to copy exactly ONE folder into your Darktide mods folder:**
 
-1. **`vultures_dodge_tracker.mod`** (the file in the root)
-2. **`scripts`** folder (the entire folder)
+**`vultures_dodge_tracker`** (the entire folder containing the mod)
 
-**❌ WRONG:** Copying the whole `vultures-fix` folder  
-**✅ RIGHT:** Copying just the two items above
+**❌ WRONG:** Copying individual files or the whole repository  
+**✅ RIGHT:** Copying just the vultures_dodge_tracker folder
 
 ### Where is your mods folder?
 Your Darktide game installation directory:
@@ -70,18 +69,22 @@ C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 DARKTIDE\mods
 ```
 From this repository:          →    To your mods folder:
 ┌─────────────────────────┐         ┌──────────────────────────────────────────┐
-│ vultures_dodge_tracker.mod  →    │ [Game Install]\Warhammer 40,000 DARKTIDE\mods\
-│ scripts/                    →    │ [Game Install]\Warhammer 40,000 DARKTIDE\mods\
+│ vultures_dodge_tracker/ →         │ [Game Install]\Warhammer 40,000 DARKTIDE\mods\
+│  (entire folder)        │         │                                           │
 └─────────────────────────┘         └──────────────────────────────────────────┘
 ```
 
 **Do NOT copy:**
 - README.md
 - INSTALL.md
-- The whole repository folder
+- The whole repository folder (vultures-fix)
 - Any documentation files
+- Individual files from inside the mod folder
 
-That's it! Both items go **directly** into the mods folder (not in a subfolder).
+**Correct result:** The vultures_dodge_tracker folder goes into mods, creating:
+```
+mods\vultures_dodge_tracker\
+```
 
 ---
 
@@ -116,26 +119,28 @@ C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 DARKTIDE\mods
 
 ### 3. Install the Mod Files
 
-**Copy BOTH of these to your mods directory:**
+**Copy the mod folder to your mods directory:**
 
 ```
-✅ vultures_dodge_tracker.mod          (drag this file)
-✅ scripts/                            (drag this entire folder)
+✅ vultures_dodge_tracker/             (drag this entire folder)
 ```
 
-**DO NOT** copy the documentation files (README.md, INSTALL.md, etc.) - only the two items above.
+**DO NOT** copy:
+- Individual files from inside the folder
+- Documentation files (README.md, INSTALL.md, etc.)
+- The entire repository folder (vultures-fix)
 
 After copying, your mods folder structure should look like:
 ```
 [Game Install]\Warhammer 40,000 DARKTIDE\mods\
-├── vultures_dodge_tracker.mod
-├── scripts\
-│   └── mods\
-│       └── vultures_dodge_tracker\
-│           ├── vultures_dodge_tracker.lua
-│           ├── vultures_dodge_tracker_data.lua
-│           └── vultures_dodge_tracker_localization.lua
-└── [other mods...]
+└── vultures_dodge_tracker\
+    ├── vultures_dodge_tracker.mod
+    └── scripts\
+        └── mods\
+            └── vultures_dodge_tracker\
+                ├── vultures_dodge_tracker.lua
+                ├── vultures_dodge_tracker_data.lua
+                └── vultures_dodge_tracker_localization.lua
 ```
 
 ### 4. Enable the Mod
@@ -184,29 +189,32 @@ Add it to `mod_load_order.txt` in your mods folder. See **MOD_NAME.txt** for det
 [ModManager][error] Mod file is invalid or missing. Mod "vultures-fix-copilot-add-vultures-dodge-tracker" with id XX skipped.
 ```
 
-**Problem:** You copied the entire repository folder into the mods directory instead of just the two required files.
+**Problem:** You copied the wrong files or folder structure.
 
 **Solution:**
-1. **Delete** the entire `vultures-fix` or `vultures-fix-copilot-add-vultures-dodge-tracker` folder from your mods directory
-2. Copy ONLY these two items into the mods folder:
-   - `vultures_dodge_tracker.mod` (the file)
-   - `scripts` folder
-3. The files should be directly in the mods folder, NOT in a subfolder
+1. **Delete** any incorrect folders from your mods directory (like `vultures-fix` or individual files)
+2. Copy the **vultures_dodge_tracker** folder (the entire folder) into the mods directory
+3. The folder should be directly in mods, as a subfolder
 
 **Correct structure:**
 ```
 ✅ CORRECT:
 [Game]\Warhammer 40,000 DARKTIDE\mods\
-├── vultures_dodge_tracker.mod          ← File directly here
-└── scripts\                             ← Folder directly here
-    └── mods\
-        └── vultures_dodge_tracker\
+└── vultures_dodge_tracker\              ← Folder goes here
+    ├── vultures_dodge_tracker.mod       ← .mod file inside
+    └── scripts\
+        └── mods\
+            └── vultures_dodge_tracker\
 
 ❌ WRONG:
 [Game]\Warhammer 40,000 DARKTIDE\mods\
+├── vultures_dodge_tracker.mod           ← Don't copy files individually!
+└── scripts\
+
+❌ ALSO WRONG:
+[Game]\Warhammer 40,000 DARKTIDE\mods\
 └── vultures-fix\                        ← Don't copy the whole repo folder!
-    ├── vultures_dodge_tracker.mod
-    ├── scripts\
+    ├── vultures_dodge_tracker\
     ├── README.md
     └── ...
 ```

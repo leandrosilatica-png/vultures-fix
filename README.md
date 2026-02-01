@@ -25,18 +25,17 @@ If the mods folder doesn't exist, you need to [install Darktide Mod Framework](h
 
 ### Quick Install (Drag & Drop)
 
-**⚠️ IMPORTANT: Do NOT copy the entire repository folder!**
+**⚠️ IMPORTANT: Copy just the mod folder!**
 
 **The mods folder is in your game installation directory:**
 ```
 C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 DARKTIDE\mods
 ```
 
-**Drag these TWO items (and ONLY these two) into the mods folder:**
-1. ✅ `vultures_dodge_tracker.mod` (the file)
-2. ✅ `scripts` folder (the entire folder)
+**Drag this ONE folder into the mods folder:**
+✅ `vultures_dodge_tracker` (the entire folder)
 
-**❌ Don't copy:** README.md, documentation files, or the whole repository folder!
+**❌ Don't copy:** README.md, documentation files, individual files, or the whole repository folder!
 
 ### Detailed Steps
 
@@ -44,14 +43,12 @@ C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 DARKTIDE\mods
 2. Find your Darktide installation:
    - Open Steam → Right-click Darktide → Properties → Installed Files → Browse
 3. Look for or create the `mods` folder in your game directory
-4. Copy **ONLY** these two items directly into the mods folder:
-   - `vultures_dodge_tracker.mod` (file)
-   - `scripts` (folder)
-5. **Do NOT** copy the entire repository folder or any documentation files
+4. Copy the **vultures_dodge_tracker** folder (the whole folder) into the mods directory
+5. **Do NOT** copy individual files or the entire repository folder
 6. Launch Darktide and enable the mod in the Mod Manager
 7. Configure settings in-game through the mod options menu
 
-**Common Error:** If you get "Mod file is invalid or missing", you copied the whole repository folder. Delete it and copy only the two items above. See [INSTALL.md](INSTALL.md) for troubleshooting.
+**Common Error:** If you get "Mod file is invalid or missing", ensure you copied the vultures_dodge_tracker folder (not individual files). See [INSTALL.md](INSTALL.md) for troubleshooting.
 
 For detailed installation help, see [INSTALL.md](INSTALL.md).
 

@@ -9,10 +9,9 @@ C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 DARKTIDE\mods
 
 ═══════════════════════════════════════════════════════════════
 
-COPY EXACTLY THESE 2 ITEMS:
+COPY EXACTLY THIS 1 FOLDER:
 
-1. vultures_dodge_tracker.mod        ← THIS FILE
-2. scripts                            ← THIS ENTIRE FOLDER
+vultures_dodge_tracker                ← THIS ENTIRE FOLDER
 
 ═══════════════════════════════════════════════════════════════
 
@@ -22,27 +21,27 @@ DO NOT COPY:
 ❌ WHAT_TO_INSTALL.md
 ❌ Any other .md files
 ❌ This COPY_THESE.txt file
-❌ The entire repository folder
+❌ Individual files from inside the folder
 
 ═══════════════════════════════════════════════════════════════
 
 AFTER COPYING, YOUR MODS FOLDER SHOULD LOOK LIKE:
 
 mods\
-├── vultures_dodge_tracker.mod  ← file directly here
-└── scripts\                     ← folder directly here
-    └── mods\
-        └── vultures_dodge_tracker\
-            ├── vultures_dodge_tracker.lua
-            ├── vultures_dodge_tracker_data.lua
-            └── vultures_dodge_tracker_localization.lua
+└── vultures_dodge_tracker\          ← The whole folder goes here
+    ├── vultures_dodge_tracker.mod   ← .mod file inside
+    └── scripts\
+        └── mods\
+            └── vultures_dodge_tracker\
+                ├── vultures_dodge_tracker.lua
+                ├── vultures_dodge_tracker_data.lua
+                └── vultures_dodge_tracker_localization.lua
 
 ═══════════════════════════════════════════════════════════════
 
 QUICK STEPS:
-1. Select "vultures_dodge_tracker.mod" (the file)
-2. CTRL+Click "scripts" (the folder) to select both
-3. Drag both into your mods folder
-4. Done!
+1. Select the "vultures_dodge_tracker" FOLDER
+2. Drag it into your mods folder
+3. Done!
 
 ═══════════════════════════════════════════════════════════════
