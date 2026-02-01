@@ -46,10 +46,15 @@ C:\Users\[YourUsername]\AppData\Local\Packages\FatsharkAB.Warhammer40000Darktide
 
 ## 🚀 QUICK INSTALL (Drag & Drop)
 
-**You need to copy TWO things into your Darktide mods folder:**
+**⚠️ CRITICAL: Do NOT copy the entire repository folder!**
+
+**You need to copy exactly TWO things into your Darktide mods folder:**
 
 1. **`vultures_dodge_tracker.mod`** (the file in the root)
 2. **`scripts`** folder (the entire folder)
+
+**❌ WRONG:** Copying the whole `vultures-fix` folder  
+**✅ RIGHT:** Copying just the two items above
 
 ### Where is your mods folder?
 Your Darktide game installation directory:
@@ -70,7 +75,13 @@ From this repository:          →    To your mods folder:
 └─────────────────────────┘         └──────────────────────────────────────────┘
 ```
 
-That's it! Both items go directly into the mods folder in your game directory.
+**Do NOT copy:**
+- README.md
+- INSTALL.md
+- The whole repository folder
+- Any documentation files
+
+That's it! Both items go **directly** into the mods folder (not in a subfolder).
 
 ---
 
@@ -155,6 +166,41 @@ Access settings through: **Mod Manager → Vulture's Dodge Tracker → Options**
 4. **Red text** = Buff is not active (only shown if "Show When Inactive" is enabled)
 
 ## Troubleshooting
+
+### ❌ Error: "Mod file is invalid or missing"
+
+**Full error message:**
+```
+[Mod] Error opening './../mods/vultures-fix-copilot-add-vultures-dodge-tracker/vultures-fix-copilot-add-vultures-dodge-tracker.mod'
+[ModManager][error] Mod file is invalid or missing. Mod "vultures-fix-copilot-add-vultures-dodge-tracker" with id XX skipped.
+```
+
+**Problem:** You copied the entire repository folder into the mods directory instead of just the two required files.
+
+**Solution:**
+1. **Delete** the entire `vultures-fix` or `vultures-fix-copilot-add-vultures-dodge-tracker` folder from your mods directory
+2. Copy ONLY these two items into the mods folder:
+   - `vultures_dodge_tracker.mod` (the file)
+   - `scripts` folder
+3. The files should be directly in the mods folder, NOT in a subfolder
+
+**Correct structure:**
+```
+✅ CORRECT:
+[Game]\Warhammer 40,000 DARKTIDE\mods\
+├── vultures_dodge_tracker.mod          ← File directly here
+└── scripts\                             ← Folder directly here
+    └── mods\
+        └── vultures_dodge_tracker\
+
+❌ WRONG:
+[Game]\Warhammer 40,000 DARKTIDE\mods\
+└── vultures-fix\                        ← Don't copy the whole repo folder!
+    ├── vultures_dodge_tracker.mod
+    ├── scripts\
+    ├── README.md
+    └── ...
+```
 
 ### Indicator Not Showing
 - Ensure the mod is enabled in the Mod Manager

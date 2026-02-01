@@ -90,9 +90,40 @@ Your mods folder should now contain:
 
 ## Common Mistakes to Avoid
 
-❌ **DON'T** copy the entire repository folder
-❌ **DON'T** copy README.md, INSTALL.md, LICENSE, etc.
-❌ **DON'T** create a subfolder called "vultures-fix" in mods
+### ❌ CRITICAL ERROR: Copying the Entire Repository Folder
+
+**DO NOT do this:**
+```
+❌ WRONG - Copying the whole folder:
+mods\
+└── vultures-fix\                    ← This causes "Mod file is invalid or missing" error!
+    ├── vultures_dodge_tracker.mod
+    ├── scripts\
+    ├── README.md
+    └── ...
+```
+
+**This will cause the error:**
+```
+[ModManager][error] Mod file is invalid or missing. 
+Mod "vultures-fix-copilot-add-vultures-dodge-tracker" with id XX skipped.
+```
+
+**Instead, do this:**
+```
+✅ CORRECT - Only the two items:
+mods\
+├── vultures_dodge_tracker.mod  ← File directly in mods folder
+└── scripts\                     ← Folder directly in mods folder
+    └── mods\
+        └── vultures_dodge_tracker\
+```
+
+### Other Common Mistakes:
+
+❌ **DON'T** copy README.md, INSTALL.md, LICENSE, etc.  
+❌ **DON'T** create a subfolder called "vultures-fix" in mods  
+❌ **DON'T** copy the entire downloaded/cloned repository folder
 
 ✅ **DO** copy just the .mod file and scripts folder
 ✅ **DO** put them directly in the mods folder
@@ -125,6 +156,43 @@ Both items go **directly** into your game's mods folder:
 ```
 
 Not into a subfolder, not renamed, just drag and drop those two items.
+
+---
+
+## 🚨 TROUBLESHOOTING: Common Errors
+
+### Error: "Mod file is invalid or missing"
+
+**You see this error:**
+```
+[Lua] [Mod] Error opening './../mods/vultures-fix-copilot-add-vultures-dodge-tracker/...'
+[ModManager][error] Mod file is invalid or missing. 
+Mod "vultures-fix-copilot-add-vultures-dodge-tracker" with id XX skipped.
+```
+
+**What went wrong:** You copied the entire repository folder instead of just the two required files.
+
+**How to fix:**
+1. Go to your mods folder: `[Game Install]\Warhammer 40,000 DARKTIDE\mods\`
+2. **DELETE** any folder named `vultures-fix` or `vultures-fix-copilot-add-vultures-dodge-tracker`
+3. Copy ONLY these two items directly into the mods folder:
+   - `vultures_dodge_tracker.mod` (file)
+   - `scripts` (folder)
+4. Launch the game again
+
+**Visual fix:**
+```
+BEFORE (Wrong):
+mods\
+└── vultures-fix\          ← Delete this entire folder!
+    ├── vultures_dodge_tracker.mod
+    └── scripts\
+
+AFTER (Correct):
+mods\
+├── vultures_dodge_tracker.mod  ← Directly in mods
+└── scripts\                     ← Directly in mods
+```
 
 ---
 
