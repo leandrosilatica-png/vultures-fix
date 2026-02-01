@@ -170,6 +170,8 @@ end
 
 -- Hook into damage dealt events to track critical hits more reliably
 -- This monitors when the player deals damage and checks if it was a critical hit
+-- Parameters: damage_profile, hit_unit, attack_type, attack_result (key), target_index, target_is_enemy, damage, attack_direction
+-- The attack_result parameter is the most important for detecting critical hits
 mod:hook_safe(CLASS.AttackReportManager, "add_attack_result", function(self, damage_profile, hit_unit, attack_type, attack_result, target_index, target_is_enemy, damage, attack_direction, ...)
 	-- Check if this is a critical hit
 	-- In Darktide, attack_result typically contains information about hit type
@@ -276,12 +278,16 @@ mod:hook_safe(CLASS.HudElementPersonalPlayerPanel, "update", function(self, dt, 
 		-- Draw text with the determined color
 		-- Note: The exact signature of draw_text may vary between game versions
 		-- This uses a common pattern that should work in most cases
+		-- If the call fails (wrong signature), the error will be silent and the indicator won't display
 		local inverse_scale = 1
 		if render_settings and render_settings.inverse_scale then
 			inverse_scale = render_settings.inverse_scale
 		end
 		
-		ui_renderer:draw_text(text, font_type, font_size_scaled, inverse_scale, position, color)
+		-- Wrap in pcall to prevent crashes if the API signature is incompatible
+		pcall(function()
+			ui_renderer:draw_text(text, font_type, font_size_scaled, inverse_scale, position, color)
+		end)
 	end
 end)
 
