@@ -3,6 +3,10 @@ local mod = get_mod("vultures_dodge_tracker")
 -- Mod initialization
 mod:io_dofile("vultures_dodge_tracker/scripts/mods/vultures_dodge_tracker/vultures_dodge_tracker_data")
 
+-- Constants
+local COLOR_ACTIVE = {0, 255, 0, 255}     -- Green (RGBA)
+local COLOR_INACTIVE = {255, 0, 0, 255}   -- Red (RGBA)
+
 -- State variables
 local _is_buff_active = false
 local _last_check_time = 0
@@ -60,7 +64,7 @@ local function check_buff_active()
 			if buff.template and buff.template.name then
 				local name_lower = string.lower(buff.template.name)
 				if string.find(name_lower, "vulture") or 
-				   string.find(name_lower, "dodge") and string.find(name_lower, "defense") then
+				   (string.find(name_lower, "dodge") and string.find(name_lower, "defense")) then
 					return true
 				end
 			end
@@ -107,7 +111,7 @@ mod:hook_safe("UIHud", "draw", function(self, dt, t, ui_renderer, render_setting
 	local indicator_text = mod:get("indicator_text")
 	
 	-- Determine color based on buff status
-	local color = _is_buff_active and {0, 255, 0, 255} or {255, 0, 0, 255}  -- Green if active, red if not
+	local color = _is_buff_active and COLOR_ACTIVE or COLOR_INACTIVE
 	
 	-- Prepare UI renderer for drawing
 	if ui_renderer then
