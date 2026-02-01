@@ -170,24 +170,28 @@ end
 
 -- Hook into damage dealt events to track critical hits more reliably
 -- This monitors when the player deals damage and checks if it was a critical hit
--- Parameters: damage_profile, hit_unit, attack_type, attack_result (key), target_index, target_is_enemy, damage, attack_direction
--- The attack_result parameter is the most important for detecting critical hits
+-- Parameters: damage_profile, hit_unit, attack_type, attack_result (most important), target_index, target_is_enemy, damage, attack_direction
 mod:hook_safe(CLASS.AttackReportManager, "add_attack_result", function(self, damage_profile, hit_unit, attack_type, attack_result, target_index, target_is_enemy, damage, attack_direction, ...)
 	-- Check if this is a critical hit
 	-- In Darktide, attack_result typically contains information about hit type
 	if attack_result then
 		-- Try multiple ways to detect crits as the structure may vary
-		if attack_result == "critical_hit" or 
-		   (type(attack_result) == "table" and (attack_result.critical_hit or attack_result.is_critical)) then
+		if attack_result == "critical_hit" then
 			_last_shot_was_crit = true
+			-- mod:echo("Crit detected via string match")  -- Uncomment for debugging
+		elseif type(attack_result) == "table" and (attack_result.critical_hit or attack_result.is_critical) then
+			_last_shot_was_crit = true
+			-- mod:echo("Crit detected via table field")  -- Uncomment for debugging
 		end
 	end
 end)
 
--- Fallback: Track when ranged actions finish, reset crit flag
+-- Fallback: Hook for action finish to maintain state consistency
+-- This hook exists to ensure crit state doesn't get stuck in edge cases
+-- Currently minimal implementation but kept for potential future use
 mod:hook_safe(CLASS.ActionShoot, "finish", function(self, reason, data, t, ...)
-	-- After an action completes, we may need to reset or maintain the crit flag
-	-- This is intentionally left minimal to avoid false negatives
+	-- Intentionally minimal - maintains hook point for potential future enhancements
+	-- Could add crit state reset logic here if needed based on gameplay testing
 end)
 
 -- ====================
@@ -203,6 +207,7 @@ end)
 
 -- Hook into weapon action to block shots when conditions are met
 -- EXPERIMENTAL: This hook intercepts weapon firing to block a shot
+-- Parameters: func (original function), self (action instance), action_settings, t (time), time_scale, action_start_params
 mod:hook(CLASS.ActionShoot, "start", function(func, self, action_settings, t, time_scale, action_start_params, ...)
 	-- Check if shot blocking is enabled
 	if not mod:get("enable_shot_block") then
