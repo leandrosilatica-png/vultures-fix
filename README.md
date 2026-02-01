@@ -59,6 +59,26 @@ The mod attempts to detect the Vulture's Dodge buff using multiple methods:
 - If the buff detection isn't working correctly:
   - The exact buff name may need to be updated based on game patches
   - Check the mod's code comments for potential buff name variations
+  - See DEBUG_GUIDE.md for detailed troubleshooting steps
+
+## Known Limitations & Assumptions
+
+⚠️ **Important**: This mod was created without direct access to Darktide's game files or a testing environment. Some aspects are based on educated guesses about the Darktide Mod Framework API and buff system.
+
+### What Might Need Adjustment:
+
+1. **Buff Names** - The exact name of the Vulture's Dodge buff is assumed. It may be different in the actual game.
+2. **UI Rendering** - The rendering method and parameters may need tweaking for your DMF version.
+3. **Hook Points** - The update/draw hook locations are educated guesses.
+4. **Buff API Methods** - The methods used to check for buffs may have different names.
+
+### How to Fix Issues:
+
+- **Enable Debug Mode**: Edit `vultures_dodge_tracker.lua` and set `DEBUG_MODE = true` at line 9
+- **Read the Documentation**: See `ASSUMPTIONS.md` for all uncertain aspects and `DEBUG_GUIDE.md` for step-by-step troubleshooting
+- **Find the Real Buff Name**: With debug mode enabled, dodge in combat and check the console for a list of all active buffs
+
+The core logic is sound, but calibration may be needed for your specific setup. The mod is designed to be easily debuggable and adjustable.
 
 ## Contributing
 
