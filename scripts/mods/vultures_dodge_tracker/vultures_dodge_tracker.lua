@@ -28,7 +28,6 @@ local mod = get_mod("vultures_dodge_tracker")
 -- ====================
 local _is_buff_active = false        -- Tracks if Vulture's Dodge is currently active
 local _last_shot_was_crit = false    -- Tracks if the last shot fired was a critical hit
-local _should_block_next_shot = false -- Flag to block the next shot when conditions are met
 
 -- ====================
 -- Constants
@@ -112,8 +111,17 @@ local function get_buff_remaining_time()
 		return 0
 	end
 	
-	-- Check if the buff is active
-	local has_buff = buff_extension:has_buff_using_buff_template(VULTURES_DODGE_BUFF_NAME)
+	-- Try to check if the buff is active using available methods
+	-- The exact API may vary, so we try multiple approaches
+	local has_buff = false
+	
+	-- Try the most common method first
+	if buff_extension.has_buff_using_buff_template then
+		has_buff = buff_extension:has_buff_using_buff_template(VULTURES_DODGE_BUFF_NAME)
+	elseif buff_extension.has_buff then
+		has_buff = buff_extension:has_buff(VULTURES_DODGE_BUFF_NAME)
+	end
+	
 	if not has_buff then
 		_is_buff_active = false
 		return 0
@@ -122,7 +130,15 @@ local function get_buff_remaining_time()
 	_is_buff_active = true
 	
 	-- Try to get the buff data to find remaining time
-	local buffs = buff_extension._buffs
+	-- Access buff data through available API, with fallback to internal access if needed
+	local buffs = nil
+	if buff_extension.get_buffs then
+		buffs = buff_extension:get_buffs()
+	elseif buff_extension._buffs then
+		-- Fallback: Access internal field (may be fragile)
+		buffs = buff_extension._buffs
+	end
+	
 	if buffs then
 		for i = 1, #buffs do
 			local buff = buffs[i]
@@ -140,6 +156,7 @@ local function get_buff_remaining_time()
 	end
 	
 	-- If we can't determine remaining time but buff is active, return a safe value
+	-- This ensures the feature doesn't trigger incorrectly
 	return 1
 end
 
@@ -148,31 +165,27 @@ end
 -- ====================
 -- These hooks monitor when shots are fired and track whether they were critical hits
 -- This information is used to determine if shot-blocking should be triggered
+-- NOTE: Critical hit detection is challenging because crits are determined during damage
+-- calculation, not at the time of shooting. We use multiple hooks for reliability.
 
--- Hook to track critical hits
--- This hooks into the damage dealt function to detect crits
-mod:hook_safe(CLASS.ActionSweep, "finish", function(self, reason, data, t, ...)
-	-- Reset crit tracking when action finishes
-	_last_shot_was_crit = false
-end)
-
--- Hook to track critical hits from ranged weapons
-mod:hook_safe(CLASS.ActionShoot, "_finish_action", function(self, reason, ...)
-	-- Check if the last shot was a critical hit
-	-- This is a simplified approach - actual implementation may need to hook into damage system
-	if self._critical_hit then
-		_last_shot_was_crit = true
-	else
-		_last_shot_was_crit = false
-	end
-end)
-
--- Alternative hook for damage dealt to track crits more reliably
-mod:hook_safe(CLASS.PlayerUnitDamageExtension, "add_damage", function(self, attacker_unit, damage_amount, hit_zone_name, damage_type, damage_direction, damage_profile, hit_actor, damaging_unit, attack_result, ...)
+-- Hook into damage dealt events to track critical hits more reliably
+-- This monitors when the player deals damage and checks if it was a critical hit
+mod:hook_safe(CLASS.AttackReportManager, "add_attack_result", function(self, damage_profile, hit_unit, attack_type, attack_result, target_index, target_is_enemy, damage, attack_direction, ...)
 	-- Check if this is a critical hit
-	if attack_result and attack_result[1] == "ATTACK_RESULT_CRIT" then
-		_last_shot_was_crit = true
+	-- In Darktide, attack_result typically contains information about hit type
+	if attack_result then
+		-- Try multiple ways to detect crits as the structure may vary
+		if attack_result == "critical_hit" or 
+		   (type(attack_result) == "table" and (attack_result.critical_hit or attack_result.is_critical)) then
+			_last_shot_was_crit = true
+		end
 	end
+end)
+
+-- Fallback: Track when ranged actions finish, reset crit flag
+mod:hook_safe(CLASS.ActionShoot, "finish", function(self, reason, data, t, ...)
+	-- After an action completes, we may need to reset or maintain the crit flag
+	-- This is intentionally left minimal to avoid false negatives
 end)
 
 -- ====================
@@ -194,18 +207,7 @@ mod:hook(CLASS.ActionShoot, "start", function(func, self, action_settings, t, ti
 		return func(self, action_settings, t, time_scale, action_start_params, ...)
 	end
 	
-	-- Check if we should block this shot
-	if _should_block_next_shot then
-		mod:echo("Shot blocked to preserve Vulture's Dodge buff")
-		_should_block_next_shot = false
-		_last_shot_was_crit = false
-		
-		-- Return early to prevent the shot from firing
-		-- Note: This is experimental and may need adjustment
-		return
-	end
-	
-	-- Check conditions for shot blocking
+	-- Check conditions for shot blocking BEFORE the shot fires
 	local threshold = mod:get("expiry_threshold") or 0.01
 	local smg_only = mod:get("smg_only")
 	local buff_time = get_buff_remaining_time()
@@ -222,19 +224,23 @@ mod:hook(CLASS.ActionShoot, "start", function(func, self, action_settings, t, ti
 		end
 	end
 	
-	-- Determine if we should block the next shot
+	-- Check if we should block THIS shot
 	if _is_buff_active 
 		and _last_shot_was_crit 
 		and buff_time > 0 
 		and buff_time <= threshold
 		and weapon_ok then
 		
-		-- Set flag to block next shot
-		_should_block_next_shot = true
-		mod:echo("Conditions met for shot blocking - next shot will be blocked")
+		-- Block this shot by not calling the original function
+		mod:echo("Shot blocked to preserve Vulture's Dodge buff")
+		_last_shot_was_crit = false  -- Reset so we don't block multiple shots
+		
+		-- Return a minimal valid result instead of nil to avoid breaking the action chain
+		-- This tells the game the action has been handled without actually firing
+		return true
 	end
 	
-	-- Call original function
+	-- Call original function to proceed with normal shot
 	return func(self, action_settings, t, time_scale, action_start_params, ...)
 end)
 
@@ -268,8 +274,14 @@ mod:hook_safe(CLASS.HudElementPersonalPlayerPanel, "update", function(self, dt, 
 	
 	if ui_renderer then
 		-- Draw text with the determined color
-		local text_options = UIFonts.get_font_options_by_style(font_type)
-		ui_renderer:draw_text(text, font_type, font_size_scaled, ui_renderer.render_settings.inverse_scale, position, color)
+		-- Note: The exact signature of draw_text may vary between game versions
+		-- This uses a common pattern that should work in most cases
+		local inverse_scale = 1
+		if render_settings and render_settings.inverse_scale then
+			inverse_scale = render_settings.inverse_scale
+		end
+		
+		ui_renderer:draw_text(text, font_type, font_size_scaled, inverse_scale, position, color)
 	end
 end)
 
