@@ -4,6 +4,8 @@
 and includes an EXPERIMENTAL automatic shot-blocking feature.
 --]]
 \nlocal mod = get_mod("vultures_dodge_tracker")
+\n-- Debug Mode
+local DEBUG_MODE = true
 \n-- State Variables
 local _is_buff_active = false
 local _last_shot_was_crit = false
@@ -93,7 +95,9 @@ mod:hook(CLASS.ActionShoot, "start", function(func, self, action_settings, t, ti
 \t\tand buff_time > 0 
 \t\tand buff_time <= threshold
 \t\tand weapon_ok then
-\t\t\tmod:echo("Shot blocked to preserve Vulture's Dodge buff")
+\t\t\tif DEBUG_MODE then
+\t\t\t\tmod:echo("Shot blocked to preserve Vulture's Dodge buff")
+\t\t\tend
 \t\t\t_last_shot_was_crit = false
 \n\t\t\treturn true
 \tend\n\nreturn func(self, action_settings, t, time_scale, action_start_params, ...)
@@ -102,8 +106,9 @@ mod:hook_safe(CLASS.HudElementPersonalPlayerPanel, "update", function(self, dt, 
 \tif not mod:get("enable_visual_indicator") then
 \t\treturn
 \tend\n\n\tlocal buff_time = get_buff_remaining_time()
-\n\tlocal color = _is_buff_active and Color.green(255, true) or Color.red(255, true)
-\tlocal text = _is_buff_active and "VULTURE ACTIVE" or "VULTURE INACTIVE"
+\n\tlocal custom_label = mod:get("custom_label") or "VULTURE"
+\tlocal color = _is_buff_active and Color.green(255, true) or Color.red(255, true)
+\tlocal text = _is_buff_active and (custom_label .. " ACTIVE") or (custom_label .. " INACTIVE")
 \n\tlocal pos_x = mod:get("indicator_position_x") or 960
 \tlocal pos_y = mod:get("indicator_position_y") or 540
 \tlocal font_size = mod:get("indicator_font_size") or 32

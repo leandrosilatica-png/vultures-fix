@@ -47,4 +47,10 @@ return {
 	smg_only_description = {
 		en = "Only apply shot blocking to SMG-type weapons (stubber, autopistol, etc.)",
 	},
+	custom_label = {
+		en = "Custom Label",
+	},
+	custom_label_description = {
+		en = "Custom text to display in the indicator (e.g., 'VULTURE', 'DODGE', etc.)",
+	},
 }
