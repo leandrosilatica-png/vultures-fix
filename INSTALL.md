@@ -149,6 +149,15 @@ After copying, your mods folder structure should look like:
 
 Access settings through: **Mod Manager → Vulture's Dodge Tracker → Options**
 
+### Mod Name for Load Order
+
+If you need to set load order (most users don't), use this name:
+```
+vultures_dodge_tracker
+```
+
+Add it to `mod_load_order.txt` in your mods folder. See **MOD_NAME.txt** for details.
+
 ### Available Settings:
 
 - **Enable Mod**: Turn the mod on/off

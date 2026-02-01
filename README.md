@@ -59,6 +59,8 @@ For detailed installation help, see [INSTALL.md](INSTALL.md).
 
 Access the mod settings through the Darktide Mod Framework options menu:
 
+**Mod Name (for load order):** `vultures_dodge_tracker` - See [MOD_NAME.txt](MOD_NAME.txt) for details.
+
 - **Enable Mod**: Toggle the entire mod on/off
 - **Font Size**: Adjust the size of the indicator text (12-48, default: 24)
 - **X Position**: Horizontal position on screen (0-1920, default: 960 - centered)
