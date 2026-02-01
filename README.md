@@ -25,15 +25,21 @@ If the mods folder doesn't exist, you need to [install Darktide Mod Framework](h
 
 ### Quick Install (Drag & Drop)
 
-**Drag these TWO items into `%AppData%\Fatshark\Darktide\mods`:**
+**The mods folder is in your game installation directory:**
+```
+C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 DARKTIDE\mods
+```
+
+**Drag these TWO items into the mods folder:**
 1. ✅ `vultures_dodge_tracker.mod` (the file)
 2. ✅ `scripts` folder (the entire folder)
 
 ### Detailed Steps
 
 1. Install the [Darktide Mod Framework](https://github.com/Darktide-Mod-Framework/Darktide-Mod-Framework) if not already installed
-2. Launch Darktide once to create the mods folder
-3. Press `Win + R`, type `%AppData%\Fatshark\Darktide\mods`, press Enter
+2. Find your Darktide installation:
+   - Open Steam → Right-click Darktide → Properties → Installed Files → Browse
+3. Look for or create the `mods` folder in your game directory
 4. Drag and drop **both** `vultures_dodge_tracker.mod` AND the `scripts` folder into the mods directory
 5. Launch Darktide and enable the mod in the Mod Manager
 6. Configure settings in-game through the mod options menu

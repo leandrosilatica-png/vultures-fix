@@ -1,41 +1,46 @@
 # Installation Guide
 
-## ⚠️ MODS FOLDER DOESN'T EXIST?
+## 📍 Where is the Mods Folder?
 
-**If `%AppData%\Fatshark\Darktide\mods` doesn't exist, you need to install the Darktide Mod Framework first!**
+**The mods folder is in your Darktide game installation directory, NOT in AppData!**
 
-### Option 1: Install Darktide Mod Framework (DMF) First ⭐ RECOMMENDED
-1. Download DMF from: https://github.com/Darktide-Mod-Framework/Darktide-Mod-Framework
-2. Follow their installation instructions
-3. Launch Darktide once with DMF installed - this creates the mods folder
-4. Then come back here to install this mod
-
-### Option 2: Create the Folder Manually
-If DMF is installed but the folder still doesn't exist:
-1. Press `Win + R`
-2. Type `%AppData%\Fatshark\Darktide`
-3. Press Enter
-4. Create a new folder called `mods` (right-click → New → Folder)
-
-### Alternative Mod Folder Locations
-
-**Steam Version:**
+### Default Steam Installation:
 ```
-%AppData%\Fatshark\Darktide\mods
+C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 DARKTIDE\mods
 ```
 
-**Microsoft Store Version:**
+### How to Find Your Mods Folder:
+
+**Method 1: Through Steam (Easiest)**
+1. Open Steam
+2. Right-click "Warhammer 40,000: Darktide" in your library
+3. Select "Properties" → "Installed Files" → "Browse"
+4. This opens your game folder
+5. Look for or create a `mods` folder here
+
+**Method 2: Direct Navigation**
+- Default location: `C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 DARKTIDE\mods`
+- Custom Steam Library: `[Your Steam Library]\steamapps\common\Warhammer 40,000 DARKTIDE\mods`
+
+### ⚠️ Mods Folder Doesn't Exist?
+
+**If the `mods` folder doesn't exist in your game directory:**
+
+1. **Install Darktide Mod Framework (DMF) First** ⭐ REQUIRED
+   - Download from: https://github.com/Darktide-Mod-Framework/Darktide-Mod-Framework
+   - Follow their installation instructions
+   - DMF will create the mods folder automatically
+
+2. **Or Create It Manually**
+   - Navigate to your game installation folder (see above)
+   - Create a new folder called `mods`
+   - But you still need DMF for mods to work!
+
+### Alternative: Microsoft Store Version
+If you installed via Microsoft Store, the path is different:
 ```
 C:\Users\[YourUsername]\AppData\Local\Packages\FatsharkAB.Warhammer40000Darktide_[random]\LocalCache\Local\Fatshark\Darktide\mods
 ```
-
-**Custom Install:**
-If Darktide is installed elsewhere, look for:
-```
-[Darktide Install Path]\..\..\AppData\Fatshark\Darktide\mods
-```
-
-Still can't find it? Check where DMF installed - the mods folder should be in the same location.
 
 ---
 
@@ -46,21 +51,26 @@ Still can't find it? Check where DMF installed - the mods folder should be in th
 1. **`vultures_dodge_tracker.mod`** (the file in the root)
 2. **`scripts`** folder (the entire folder)
 
-### Where to find your mods folder:
-Press `Win + R`, type `%AppData%\Fatshark\Darktide\mods`, press Enter
+### Where is your mods folder?
+Your Darktide game installation directory:
+```
+C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 DARKTIDE\mods
+```
 
-**If this doesn't work, see troubleshooting section above ⬆️**
+**Quick way to find it:**
+- Open Steam → Right-click Darktide → Properties → Installed Files → Browse
+- Look for the `mods` folder there
 
 ### What to drag and drop:
 ```
 From this repository:          →    To your mods folder:
-┌─────────────────────────┐         ┌──────────────────────────────┐
-│ vultures_dodge_tracker.mod  →    │ %AppData%\Fatshark\Darktide\mods\
-│ scripts/                    →    │ %AppData%\Fatshark\Darktide\mods\
-└─────────────────────────┘         └──────────────────────────────┘
+┌─────────────────────────┐         ┌──────────────────────────────────────────┐
+│ vultures_dodge_tracker.mod  →    │ [Game Install]\Warhammer 40,000 DARKTIDE\mods\
+│ scripts/                    →    │ [Game Install]\Warhammer 40,000 DARKTIDE\mods\
+└─────────────────────────┘         └──────────────────────────────────────────┘
 ```
 
-That's it! Both items go directly into the mods folder.
+That's it! Both items go directly into the mods folder in your game directory.
 
 ---
 
@@ -77,17 +87,21 @@ That's it! Both items go directly into the mods folder.
 Download all files from this repository (use "Code" → "Download ZIP" on GitHub).
 
 ### 2. Locate Your Darktide Mods Directory
-The default location is:
+
+**The mods folder is in your game installation directory:**
+
+Default Steam location:
 ```
-%AppData%\Fatshark\Darktide\mods
+C:\Program Files (x86)\Steam\steamapps\common\Warhammer 40,000 DARKTIDE\mods
 ```
 
-To get there:
-1. Press `Win + R`
-2. Type `%AppData%\Fatshark\Darktide\mods`
-3. Press Enter
+**To find it easily:**
+1. Open Steam
+2. Right-click "Warhammer 40,000: Darktide" in your library
+3. Select "Properties" → "Installed Files" → "Browse"
+4. Look for the `mods` folder in the game directory
 
-**⚠️ Folder doesn't exist?** See the troubleshooting section at the top of this document!
+**⚠️ Folder doesn't exist?** Create it, or see the troubleshooting section at the top of this document!
 
 ### 3. Install the Mod Files
 
@@ -102,7 +116,7 @@ To get there:
 
 After copying, your mods folder structure should look like:
 ```
-%AppData%\Fatshark\Darktide\mods\
+[Game Install]\Warhammer 40,000 DARKTIDE\mods\
 ├── vultures_dodge_tracker.mod
 ├── scripts\
 │   └── mods\
