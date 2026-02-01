@@ -1,12 +1,43 @@
+--[[
+	Vulture's Dodge Tracker with Automatic Shot-Blocking
+	
+	This mod provides visual tracking of the Vulture's Dodge buff for Hive Scum (Outcast) class
+	and includes an EXPERIMENTAL automatic shot-blocking feature.
+	
+	EXPERIMENTAL FEATURE: Automatic Shot-Blocking
+	When all conditions are met, this mod will prevent ONE shot from firing:
+	1. Vulture's Dodge buff is currently active
+	2. The last shot was a critical hit
+	3. The buff is within a configurable threshold of expiring (default: 0.01 seconds)
+	4. Player is using an SMG-type weapon (if smg_only setting is enabled)
+	
+	This gives the player time to dodge and refresh the buff, helping to maintain the
+	buff's uptime, especially when it bugs out and doesn't refresh properly.
+	
+	NOTES:
+	- This feature is experimental and may need adjustments based on game updates
+	- The hook points may change with Darktide patches
+	- The mod will fail gracefully if hooks don't work as expected
+	- Since Darktide has no anti-cheat, input/action manipulation is possible
+--]]
+
 local mod = get_mod("vultures_dodge_tracker")
 
--- Mod state variables
-local _is_buff_active = false
-local _last_shot_was_crit = false
-local _should_block_next_shot = false
+-- ====================
+-- Mod State Variables
+-- ====================
+local _is_buff_active = false        -- Tracks if Vulture's Dodge is currently active
+local _last_shot_was_crit = false    -- Tracks if the last shot fired was a critical hit
+local _should_block_next_shot = false -- Flag to block the next shot when conditions are met
 
+-- ====================
 -- Constants
-local VULTURES_DODGE_BUFF_NAME = "toughness_regen_on_crit_kills"  -- Internal buff name for Vulture's Dodge
+-- ====================
+-- Internal buff name for Vulture's Dodge (may need adjustment based on game version)
+local VULTURES_DODGE_BUFF_NAME = "toughness_regen_on_crit_kills"
+
+-- List of SMG weapon templates to identify SMG-type weapons
+-- NOTE: This list may need to be expanded as new weapons are added to the game
 local SMG_WEAPON_TEMPLATES = {
 	"autogun_p1_m1",  -- Autopistol
 	"autogun_p2_m1",  -- Autopistol variant
@@ -14,7 +45,16 @@ local SMG_WEAPON_TEMPLATES = {
 	-- Add more SMG templates as needed
 }
 
--- Helper function to check if weapon is an SMG type
+-- ====================
+-- Helper Functions
+-- ====================
+
+--[[
+	Check if the current weapon is an SMG-type weapon
+	
+	@param weapon_template - The weapon template object from the game
+	@return boolean - True if weapon is an SMG, false otherwise
+--]]
 local function is_smg_weapon(weapon_template)
 	if not weapon_template then
 		return false
@@ -37,7 +77,11 @@ local function is_smg_weapon(weapon_template)
 	return false
 end
 
--- Get the player's buff extension
+--[[
+	Get the player's buff extension to query buff status
+	
+	@return BuffExtension or nil - The player's buff extension if available
+--]]
 local function get_player_buff_extension()
 	local player = Managers.player:local_player(1)
 	if not player then
@@ -53,7 +97,15 @@ local function get_player_buff_extension()
 	return buff_extension
 end
 
--- Get remaining time on Vulture's Dodge buff
+--[[
+	Get the remaining time on the Vulture's Dodge buff
+	
+	This function queries the buff extension to determine:
+	1. If the buff is currently active
+	2. How much time remains before it expires
+	
+	@return number - Remaining time in seconds (0 if buff is not active)
+--]]
 local function get_buff_remaining_time()
 	local buff_extension = get_player_buff_extension()
 	if not buff_extension then
@@ -91,6 +143,12 @@ local function get_buff_remaining_time()
 	return 1
 end
 
+-- ====================
+-- Critical Hit Tracking Hooks
+-- ====================
+-- These hooks monitor when shots are fired and track whether they were critical hits
+-- This information is used to determine if shot-blocking should be triggered
+
 -- Hook to track critical hits
 -- This hooks into the damage dealt function to detect crits
 mod:hook_safe(CLASS.ActionSweep, "finish", function(self, reason, data, t, ...)
@@ -116,6 +174,17 @@ mod:hook_safe(CLASS.PlayerUnitDamageExtension, "add_damage", function(self, atta
 		_last_shot_was_crit = true
 	end
 end)
+
+-- ====================
+-- Automatic Shot-Blocking Hook (EXPERIMENTAL)
+-- ====================
+-- This is the core of the shot-blocking feature. It intercepts weapon firing
+-- and prevents a shot when conditions are met to help preserve the buff.
+-- 
+-- EXPERIMENTAL NOTES:
+-- - The exact hook point may need adjustment based on Darktide's code structure
+-- - This may break with game updates and require maintenance
+-- - The mod fails gracefully if the hook doesn't work as expected
 
 -- Hook into weapon action to block shots when conditions are met
 -- EXPERIMENTAL: This hook intercepts weapon firing to block a shot
@@ -169,6 +238,11 @@ mod:hook(CLASS.ActionShoot, "start", function(func, self, action_settings, t, ti
 	return func(self, action_settings, t, time_scale, action_start_params, ...)
 end)
 
+-- ====================
+-- Visual Indicator
+-- ====================
+-- Draws the on-screen indicator showing buff status (green = active, red = inactive)
+
 -- Visual indicator drawing
 mod:hook_safe(CLASS.HudElementPersonalPlayerPanel, "update", function(self, dt, t, ui_renderer, render_settings, input_service)
 	if not mod:get("enable_visual_indicator") then
@@ -199,9 +273,14 @@ mod:hook_safe(CLASS.HudElementPersonalPlayerPanel, "update", function(self, dt, 
 	end
 end)
 
+-- ====================
+-- Mod Lifecycle Callbacks
+-- ====================
+
 -- Mod initialization
 mod.on_all_mods_loaded = function()
 	mod:echo("Vulture's Dodge Tracker loaded with automatic shot-blocking feature")
+	mod:echo("Note: Shot-blocking feature is EXPERIMENTAL and may need adjustments")
 end
 
 -- Mod settings changed callback
